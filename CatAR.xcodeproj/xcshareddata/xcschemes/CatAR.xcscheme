@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B9A19ADE1CC70D16120BAEC0"
+               BlueprintIdentifier = "1274FA22E40A365FC84840B7"
                BuildableName = "CatAR.app"
                BlueprintName = "CatAR"
                ReferencedContainer = "container:CatAR.xcodeproj">

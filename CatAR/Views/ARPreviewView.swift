@@ -25,19 +25,38 @@ struct ARPreviewView: View {
 
             // Overlay UI
             VStack {
-                // Status toast at top
-                HStack {
-                    Image(systemName: isPlacing ? "scope" : "checkmark.circle.fill")
-                        .foregroundColor(isPlacing ? .yellow : .green)
-                    Text(statusMessage)
-                        .font(.subheadline.weight(.medium))
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.leading)
+                // Top header with close button and status toast
+                ZStack(alignment: .top) {
+                    HStack {
+                        Button {
+                            // First dismiss closes the AR view.
+                            dismiss()
+                        } label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(.white)
+                                .padding(12)
+                                .background(Circle().fill(.black.opacity(0.6)))
+                        }
+                        .padding(.leading, 20)
+                        
+                        Spacer()
+                    }
+                    
+                    // Status toast at top
+                    HStack {
+                        Image(systemName: isPlacing ? "scope" : "checkmark.circle.fill")
+                            .foregroundColor(isPlacing ? .yellow : .green)
+                        Text(statusMessage)
+                            .font(.subheadline.weight(.medium))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.leading)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(.black.opacity(0.55))
+                    .clipShape(Capsule())
                 }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 10)
-                .background(.black.opacity(0.55))
-                .clipShape(Capsule())
                 .padding(.top, 60)
                 .animation(.easeInOut, value: statusMessage)
 
