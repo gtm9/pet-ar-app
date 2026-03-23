@@ -11,6 +11,10 @@ struct ARPreviewView: View {
     @State private var isPlacing = true
     @State private var statusMessage = "Aim at a flat surface, then tap to place your cat 🐾"
     @State private var showShareSheet = false
+    
+    // Feature 2: Animation state
+    @State private var triggerAnimation = false
+    
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -19,7 +23,8 @@ struct ARPreviewView: View {
             ARViewContainer(
                 modelURL: modelURL,
                 isPlacing: $isPlacing,
-                statusMessage: $statusMessage
+                statusMessage: $statusMessage,
+                triggerAnimation: $triggerAnimation
             )
             .ignoresSafeArea()
 
@@ -58,7 +63,7 @@ struct ARPreviewView: View {
                     .clipShape(Capsule())
                 }
                 .padding(.top, 60)
-                .animation(.easeInOut, value: statusMessage)
+                .animation(.easeInOut, value: statusMessage) // Explicit value per best practice
 
                 Spacer()
 
@@ -74,13 +79,16 @@ struct ARPreviewView: View {
                         dismiss() // pop back to home
                     }
 
-                    // Animate button (disabled for Feature 1)
+                    // Animate button
                     ToolbarButton(
                         icon: "figure.walk",
                         label: "Animate",
-                        gradient: [Color.gray.opacity(0.4), Color.gray.opacity(0.4)],
-                        isDisabled: true
-                    ) {}
+                        gradient: [Color(hex: "00C9FF"), Color(hex: "92FE9D")],
+                        isDisabled: isPlacing // Disabled while placing, enabled once placed
+                    ) {
+                        // Trigger the animation in the ARView
+                        triggerAnimation.toggle()
+                    }
 
                     // Share USDZ
                     ShareLink(item: modelURL) {

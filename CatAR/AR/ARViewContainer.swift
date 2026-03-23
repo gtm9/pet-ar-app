@@ -11,6 +11,7 @@ struct ARViewContainer: UIViewRepresentable {
     let modelURL: URL
     @Binding var isPlacing: Bool
     @Binding var statusMessage: String
+    @Binding var triggerAnimation: Bool
 
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
@@ -44,7 +45,17 @@ struct ARViewContainer: UIViewRepresentable {
         return arView
     }
 
-    func updateUIView(_ uiView: ARView, context: Context) {}
+    func updateUIView(_ uiView: ARView, context: Context) {
+        // Trigger programmatic RealityKit animation when the SwiftUI binding changes
+        if triggerAnimation {
+            context.coordinator.playHopAnimation()
+            
+            // Immediately reset binding to allow future triggers (must be dispatched to avoid modifying state during view update)
+            DispatchQueue.main.async {
+                triggerAnimation = false
+            }
+        }
+    }
 
     func makeCoordinator() -> Coordinator {
         Coordinator()
@@ -68,6 +79,38 @@ struct ARViewContainer: UIViewRepresentable {
         // Store the loaded model in memory so it's ready to place instantly
         private var loadedModel: ModelEntity?
         private var placedEntity: ModelEntity?
+        private var isAnimating = false
+
+        func playHopAnimation() {
+            guard let entity = placedEntity else { return }
+            guard !isAnimating else { return }
+            isAnimating = true
+            
+            let originalTransform = entity.transform
+            
+            // Hop up 20cm and rotate 180 degrees
+            var upTransform = originalTransform
+            upTransform.translation.y += 0.2
+            upTransform.rotation = simd_quatf(angle: .pi, axis: [0, 1, 0]) * originalTransform.rotation
+            
+            // Land back down and complete 360 degree rotation
+            var downTransform = originalTransform
+            downTransform.rotation = simd_quatf(angle: .pi * 2, axis: [0, 1, 0]) * originalTransform.rotation
+            
+            // Execute sequence
+            entity.move(to: upTransform, relativeTo: entity.parent, duration: 0.3, timingFunction: .easeOut)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.31) {
+                // By 0.31s, the first animation should be complete
+                entity.move(to: downTransform, relativeTo: entity.parent, duration: 0.3, timingFunction: .easeIn)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.31) {
+                    self.isAnimating = false
+                    // Reset rotation perfectly flat to avoid drift from floating point errors
+                    entity.transform.rotation = originalTransform.rotation
+                }
+            }
+        }
 
         private func loadModelAsync(url: URL) {
             print("📦 [ARViewContainer] Starting async load of model from: \(url.lastPathComponent)")
@@ -164,10 +207,6 @@ struct ARViewContainer: UIViewRepresentable {
             }
 
             entityToPlace.generateCollisionShapes(recursive: true)
-            
-            // Debug: Add a small cube to verify anchor position
-            let debugCube = ModelEntity(mesh: .generateBox(size: 0.05), materials: [SimpleMaterial(color: .green.withAlphaComponent(0.5), isMetallic: false)])
-            anchor.addChild(debugCube)
             
             // Enable gestures
             arView.installGestures([.translation, .rotation, .scale], for: entityToPlace)

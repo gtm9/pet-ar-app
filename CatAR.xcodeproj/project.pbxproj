@@ -12,10 +12,12 @@
 		150225253B88DB47AD38CE19 /* PhotogrammetryProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB689A0A7BDD59F6B59410B /* PhotogrammetryProcessor.swift */; };
 		2DB4C35A29D0C806231466B9 /* ARPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5263F01C96E0DE8840817633 /* ARPreviewView.swift */; };
 		4D1FC1D946E9FF65494EE24B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443686B17899081BAE9E6ADD /* Foundation.framework */; };
+		57F1767BDEE4659578000127 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443686B17899081BAE9E6ADD /* Foundation.framework */; };
 		5FA6F68343AE217EC14CBC15 /* RealityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262635DCA104E76E3DEBA880 /* RealityKit.framework */; };
 		6C9510F62AD152B2ADF24A6A /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35876290EE93716A6DA5BCDD /* ARViewContainer.swift */; };
 		6DD6D0074CFB4BE2D2D87284 /* PhotoCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E53A481B8A0B33ECDD9F8F7 /* PhotoCaptureManager.swift */; };
 		943764FCB3104AB61F6077F1 /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E998D1BBBC7863CE2AF4AA3D /* ProcessingView.swift */; };
+		9D9201331B498A869D5C8EBA /* CatARTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3522D204333CAC32DE4AEEE1 /* CatARTests.swift */; };
 		A1DDDE5AB3A3203D9B09E624 /* VideoFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCBB2EAF652D284C1BD137F /* VideoFrameExtractor.swift */; };
 		A91B9CA326ED694281105003 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA92D4B022B24AD492DD318 /* SwiftUI.framework */; };
 		B3B841647DCDAB3D709E38FC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4365CEC9AFE1003ECB594AB8 /* AVFoundation.framework */; };
@@ -23,8 +25,19 @@
 		D98D7ECAFDEBCDDC270EED55 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445F69CE2757AA739C2DBF9C /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		32119E31174F4961E97D4AB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC25AEE76A30E717A7CE8072 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1274FA22E40A365FC84840B7;
+			remoteInfo = CatAR;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		262635DCA104E76E3DEBA880 /* RealityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealityKit.framework; path = System/Library/Frameworks/RealityKit.framework; sourceTree = "<group>"; };
+		3522D204333CAC32DE4AEEE1 /* CatARTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CatARTests.swift; sourceTree = "<group>"; };
 		35876290EE93716A6DA5BCDD /* ARViewContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
 		4365CEC9AFE1003ECB594AB8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = "<group>"; };
 		443686B17899081BAE9E6ADD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -33,6 +46,7 @@
 		50133C93372EB7C682061391 /* CatAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5263F01C96E0DE8840817633 /* ARPreviewView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ARPreviewView.swift; sourceTree = "<group>"; };
 		53A5EF80E00050C8FFBCB242 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = "<group>"; };
+		5C810249598CDE7E26A9BFCD /* CatARTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatARTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCBB2EAF652D284C1BD137F /* VideoFrameExtractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoFrameExtractor.swift; sourceTree = "<group>"; };
 		B6E6C779F86F76EBE1675E78 /* CatARApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CatARApp.swift; sourceTree = "<group>"; };
 		BA06CC8060AC0775E0CAB431 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -43,6 +57,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AB1FEB84F46180CE403D9CD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57F1767BDEE4659578000127 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7972E9937BB6C1EAD2D7E4D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -62,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				50133C93372EB7C682061391 /* CatAR.app */,
+				5C810249598CDE7E26A9BFCD /* CatARTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,6 +134,15 @@
 			path = AR;
 			sourceTree = "<group>";
 		};
+		92CE4BEEA26348F536C20C6B /* CatARTests */ = {
+			isa = PBXGroup;
+			children = (
+				3522D204333CAC32DE4AEEE1 /* CatARTests.swift */,
+			);
+			name = CatARTests;
+			path = CatARTests;
+			sourceTree = "<group>";
+		};
 		94A0CAB8B44CFE60D3FE8EBF /* CatAR */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +186,7 @@
 				389B7C73BAA830B32BEEF901 /* Frameworks */,
 				94A0CAB8B44CFE60D3FE8EBF /* CatAR */,
 				9AC3EC7C0CEE9B54202348DF /* Frameworks */,
+				92CE4BEEA26348F536C20C6B /* CatARTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,6 +209,24 @@
 			productName = CatAR;
 			productReference = 50133C93372EB7C682061391 /* CatAR.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B14840992EE71AA7BE3CC33F /* CatARTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59FBAD370F8BAFEA21CBA0CD /* Build configuration list for PBXNativeTarget "CatARTests" */;
+			buildPhases = (
+				F70CC8845D0383D618F93908 /* Sources */,
+				AB1FEB84F46180CE403D9CD9 /* Frameworks */,
+				502C0F371B2D65BBFF383010 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85F5027993F5AE8C055CA2A2 /* PBXTargetDependency */,
+			);
+			name = CatARTests;
+			productName = CatARTests;
+			productReference = 5C810249598CDE7E26A9BFCD /* CatARTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -202,12 +253,20 @@
 			projectRoot = "";
 			targets = (
 				1274FA22E40A365FC84840B7 /* CatAR */,
+				B14840992EE71AA7BE3CC33F /* CatARTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		094EF13DF3CB113DF279DF5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		502C0F371B2D65BBFF383010 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -233,7 +292,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F70CC8845D0383D618F93908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D9201331B498A869D5C8EBA /* CatARTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		85F5027993F5AE8C055CA2A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CatAR;
+			target = 1274FA22E40A365FC84840B7 /* CatAR */;
+			targetProxy = 32119E31174F4961E97D4AB9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2C684FCD8B6488D45DA3704B /* Debug */ = {
@@ -297,6 +373,39 @@
 			};
 			name = Debug;
 		};
+		3D00FD61F977032AB677D366 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = ATV2866HFQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundlePackageType = BNDL;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.catapp.CatARTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CatAR.app/CatAR";
+			};
+			name = Debug;
+		};
+		57B668C643647474119EF2DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = ATV2866HFQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundlePackageType = BNDL;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.catapp.CatARTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CatAR.app/CatAR";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		64E7FF054C9A36A235A1894B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -358,12 +467,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = ATV2866HFQ;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CatAR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.catapp.CatAR;
+				PRODUCT_NAME = CatAR;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -378,12 +490,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = ATV2866HFQ;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CatAR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.catapp.CatAR;
+				PRODUCT_NAME = CatAR;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -393,6 +508,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		59FBAD370F8BAFEA21CBA0CD /* Build configuration list for PBXNativeTarget "CatARTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57B668C643647474119EF2DC /* Release */,
+				3D00FD61F977032AB677D366 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6A707F4471CDEF6B5B0576A1 /* Build configuration list for PBXNativeTarget "CatAR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
