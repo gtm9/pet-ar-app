@@ -37,7 +37,7 @@ final class PhotogrammetryProcessor {
 
         var config = PhotogrammetrySession.Configuration()
         config.featureSensitivity = .high
-        config.isObjectMaskingEnabled = false
+        config.isObjectMaskingEnabled = true
         config.checkpointDirectory = Self.checkpointURL
 
         do {

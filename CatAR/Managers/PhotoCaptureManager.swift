@@ -79,16 +79,20 @@ final class PhotoCaptureManager: NSObject {
             object: session,
             queue: .main
         ) { [weak self] notification in
-            if let error = notification.userInfo?[AVCaptureSessionErrorKey] as? AVError {
-                print("❌ [PhotoCaptureManager] Runtime error: \(error.localizedDescription)")
-                self?.errorMessage = "Camera error: \(error.localizedDescription)"
+            Task { @MainActor in
+                if let error = notification.userInfo?[AVCaptureSessionErrorKey] as? AVError {
+                    print("❌ [PhotoCaptureManager] Runtime error: \(error.localizedDescription)")
+                    self?.errorMessage = "Camera error: \(error.localizedDescription)"
+                }
             }
         }
 
-        Task(priority: .userInitiated) {
-            self.session.startRunning()
-            print("✅ [PhotoCaptureManager] Session is running: \(self.session.isRunning)")
-            self.isSessionRunning = true
+        Task {
+            session.startRunning()
+            await MainActor.run {
+                print("✅ [PhotoCaptureManager] Session is running: \(self.session.isRunning)")
+                self.isSessionRunning = true
+            }
         }
     }
 
