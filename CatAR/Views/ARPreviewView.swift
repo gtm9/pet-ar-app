@@ -12,8 +12,13 @@ struct ARPreviewView: View {
     @State private var statusMessage = "Aim at a flat surface, then tap to place your cat 🐾"
     @State private var showShareSheet = false
     
-    // Feature 2: Animation state
+    // Feature 3: AI & Animation state
     @State private var triggerAnimation = false
+    @State private var isAutoBehaviorEnabled = false
+    @State private var selectedAnimation: ARViewContainer.CatAnimation? = nil
+    
+    // Feature 5: World Interaction state
+    @State private var lookAtMe = false
     
     @Environment(\.dismiss) private var dismiss
 
@@ -24,17 +29,20 @@ struct ARPreviewView: View {
                 modelURL: modelURL,
                 isPlacing: $isPlacing,
                 statusMessage: $statusMessage,
-                triggerAnimation: $triggerAnimation
+                triggerAnimation: $triggerAnimation,
+                isAutoBehaviorEnabled: $isAutoBehaviorEnabled,
+                selectedAnimation: $selectedAnimation,
+                lookAtMe: $lookAtMe
             )
             .ignoresSafeArea()
 
             // Overlay UI
             VStack {
-                // Top header with close button and status toast
-                ZStack(alignment: .top) {
+                // Top UI layer
+                VStack(spacing: 12) {
+                    // Row 1: Close button
                     HStack {
                         Button {
-                            // First dismiss closes the AR view.
                             dismiss()
                         } label: {
                             Image(systemName: "xmark")
@@ -48,27 +56,31 @@ struct ARPreviewView: View {
                         Spacer()
                     }
                     
-                    // Status toast at top
+                    // Row 2: Status toast
                     HStack {
-                        Image(systemName: isPlacing ? "scope" : "checkmark.circle.fill")
-                            .foregroundColor(isPlacing ? .yellow : .green)
-                        Text(statusMessage)
-                            .font(.subheadline.weight(.medium))
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.leading)
+                        Spacer()
+                        HStack {
+                            Image(systemName: isPlacing ? "scope" : "checkmark.circle.fill")
+                                .foregroundColor(isPlacing ? .yellow : .green)
+                            Text(statusMessage)
+                                .font(.subheadline.weight(.medium))
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.leading)
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 10)
+                        .background(.black.opacity(0.55))
+                        .clipShape(Capsule())
+                        Spacer()
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 10)
-                    .background(.black.opacity(0.55))
-                    .clipShape(Capsule())
                 }
                 .padding(.top, 60)
-                .animation(.easeInOut, value: statusMessage) // Explicit value per best practice
+                .animation(.easeInOut, value: statusMessage)
 
                 Spacer()
 
                 // Bottom toolbar
-                HStack(spacing: 20) {
+                HStack(spacing: 12) {
                     // Re-scan button
                     ToolbarButton(
                         icon: "camera.fill",
@@ -76,19 +88,54 @@ struct ARPreviewView: View {
                         gradient: [Color(hex: "FF8C42"), Color(hex: "FF3CAC")]
                     ) {
                         dismiss()
-                        dismiss() // pop back to home
+                        dismiss()
                     }
 
-                    // Animate button
+                    // Behavior Toggle
                     ToolbarButton(
-                        icon: "figure.walk",
-                        label: "Animate",
-                        gradient: [Color(hex: "00C9FF"), Color(hex: "92FE9D")],
-                        isDisabled: isPlacing // Disabled while placing, enabled once placed
+                        icon: isAutoBehaviorEnabled ? "brain.head.profile" : "brain",
+                        label: isAutoBehaviorEnabled ? "Auto AI" : "Manual",
+                        gradient: isAutoBehaviorEnabled ? [Color.green, Color.blue] : [Color.gray, Color.black],
+                        isDisabled: isPlacing
                     ) {
-                        // Trigger the animation in the ARView
-                        triggerAnimation.toggle()
+                        isAutoBehaviorEnabled.toggle()
+                        statusMessage = isAutoBehaviorEnabled ? "Cat AI is now active! 🧠" : "Cat AI paused."
                     }
+                    
+                    // Feature 5: Look-at-me Toggle
+                    ToolbarButton(
+                        icon: lookAtMe ? "eye.fill" : "eye.slash",
+                        label: "Eye Contact",
+                        gradient: lookAtMe ? [Color.orange, Color.yellow] : [Color.gray, Color.black.opacity(0.8)],
+                        isDisabled: isPlacing
+                    ) {
+                        lookAtMe.toggle()
+                        statusMessage = lookAtMe ? "The cat is watching you! 👀" : "The cat is distracted."
+                    }
+
+                    // Animations Menu
+                    Menu {
+                        Button("Jump & Spin") { 
+                            selectedAnimation = .hop
+                            triggerAnimation = true
+                        }
+                        Button("Pounce Move") { 
+                            selectedAnimation = .pounce 
+                            triggerAnimation = true
+                        }
+                        Button("Stretch Up") { 
+                            selectedAnimation = .stretch
+                            triggerAnimation = true
+                        }
+                    } label: {
+                        ToolbarButton(
+                            icon: "figure.walk",
+                            label: "Action",
+                            gradient: [Color(hex: "00C9FF"), Color(hex: "92FE9D")],
+                            isDisabled: isPlacing
+                        ) {}
+                    }
+                    .disabled(isPlacing)
 
                     // Share USDZ
                     ShareLink(item: modelURL) {
@@ -97,9 +144,9 @@ struct ARPreviewView: View {
                                 Circle()
                                     .fill(LinearGradient(colors: [Color(hex: "4776E6"), Color(hex: "8E54E9")],
                                                          startPoint: .topLeading, endPoint: .bottomTrailing))
-                                    .frame(width: 56, height: 56)
+                                    .frame(width: 50, height: 50)
                                 Image(systemName: "square.and.arrow.up")
-                                    .font(.system(size: 22, weight: .semibold))
+                                    .font(.system(size: 20, weight: .semibold))
                                     .foregroundColor(.white)
                             }
                             Text("Share")
@@ -108,7 +155,7 @@ struct ARPreviewView: View {
                         }
                     }
                 }
-                .padding(.horizontal, 40)
+                .padding(.horizontal, 10)
                 .padding(.bottom, 48)
             }
         }

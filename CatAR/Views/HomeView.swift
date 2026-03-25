@@ -186,6 +186,13 @@ struct HomeView: View {
                     .overlay(RoundedRectangle(cornerRadius: 16).stroke(.white.opacity(0.08), lineWidth: 1))
                 }
                 .padding(.horizontal, 24)
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button(role: .destructive) {
+                        deleteModel(at: url)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
             }
         }
     }
@@ -201,6 +208,17 @@ struct HomeView: View {
         )) ?? []
         savedModels = all.filter { $0.pathExtension == "usdz" }
             .sorted { ($0.creationDate ?? .distantPast) > ($1.creationDate ?? .distantPast) }
+    }
+
+    private func deleteModel(at url: URL) {
+        do {
+            try FileManager.default.removeItem(at: url)
+            withAnimation(.spring()) {
+                savedModels.removeAll(where: { $0 == url })
+            }
+        } catch {
+            print("❌ [HomeView] Failed to delete model: \(error)")
+        }
     }
 
     private let instructions: [(emoji: String, title: String, detail: String)] = [

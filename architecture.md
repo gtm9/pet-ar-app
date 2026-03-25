@@ -17,7 +17,11 @@ The app follows a modern SwiftUI MVVM architecture augmented with Apple's latest
 - Shared/injected configuration states (like triggering animations from UI overlays to underlying AR containers) utilize `@Binding`.
 - Complex asynchronous processing lives in `@Observable` classes independent of the UI layer to maintain purity in the View `body`.
 
-## Animation System
-Because Photogrammetry generates static 3D meshes (without skeletons or bone rigs), standard skeletal animations cannot be applied. Instead, `CatAR` implements **Transform-Based Animations**:
-- Programmatic RealityKit `Entity.move(to:duration:timingFunction)` sequences apply full-body translations and rotations to simulate life-like motion (e.g., a "Hop & Spin").
-- Animation states are tightly coupled to the Coordinator to prevent redundant or conflicting transforms during active sequences.
+## Animation & AI Behavior System
+Because Photogrammetry generates static 3D meshes (without skeletons or bone rigs), standard skeletal animations cannot be applied. Instead, `CatAR` implements **Transform-Based Animations & AI**:
+- **Programmatic RealityKit Animations**: `Entity.move(to:duration:timingFunction)` sequences apply full-body translations and rotations to simulate life-like motion (e.g., "Hop & Spin", "Pounce", "Stretch").
+- **Autonomous Cat AI**: A state machine within the `Coordinator` manages a background `Task` that periodically triggers behaviors (e.g., wandering to a random point on the floor) when the "Auto Behavior" mode is enabled in the UI.
+- **World Interaction (Feature 5)**: 
+    - **Occlusion**: Utilizes `.sceneDepth` and `.personSegmentation` frame semantics to ensure the virtual cat is correctly hidden behind physical furniture and people.
+    - **Eye Contact**: An async `lookAtMeTask` in the `Coordinator` continuously adjusts the cat's rotation to face the AR camera's world position, simulating lifelike attention.
+- **State Guarding**: All animations and AI movements are guarded by an `isAnimating` flag to prevent overlapping transforms and ensure smooth transitions.
